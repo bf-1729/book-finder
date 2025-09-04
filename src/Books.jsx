@@ -6,62 +6,61 @@ const Books = () => {
   const [year, setYear] = useState(localStorage.getItem("year") || "");
   const [language, setLanguage] = useState(localStorage.getItem("language") || "");
 
+  // Parse from localStorage only on initialization
   const [books, setBooks] = useState(() => {
     const saved = localStorage.getItem("books");
     return saved ? JSON.parse(saved) : [];
   });
-  // Language codes with full names
-const languageMap = {
-  en: "English",
-  fr: "French",
-  de: "German",
-  es: "Spanish",
-  it: "Italian",
-  pt: "Portuguese",
-  ru: "Russian",
-  zh: "Chinese",
-  ja: "Japanese",
-  ar: "Arabic",
-  hi: "Hindi",
-  bn: "Bengali",
-  ta: "Tamil",
-  te: "Telugu",
-  ml: "Malayalam",
-  ur: "Urdu",
-  tr: "Turkish",
-  ko: "Korean",
-  nl: "Dutch",
-  pl: "Polish",
-  sv: "Swedish",
-  fi: "Finnish",
-  no: "Norwegian",
-  da: "Danish",
-  cs: "Czech",
-  el: "Greek",
-  he: "Hebrew",
-  id: "Indonesian",
-  th: "Thai",
-  vi: "Vietnamese",
-  uk: "Ukrainian",
-  ro: "Romanian",
-  hu: "Hungarian",
-  fa: "Persian",
-  sr: "Serbian",
-  sk: "Slovak",
-  bg: "Bulgarian",
-  lt: "Lithuanian",
-  lv: "Latvian",
-  et: "Estonian",
-  sl: "Slovenian",
-  hr: "Croatian",
-  ga: "Irish",
-  mt: "Maltese",
-  is: "Icelandic",
-  af: "Afrikaans",
-  sw: "Swahili",
-};
 
-const allLanguages = Object.keys(languageMap).sort();
+  const allLanguages = {
+  eng: "English",
+  fre: "French",
+  ger: "German",
+  spa: "Spanish",
+  ita: "Italian",
+  por: "Portuguese",
+  rus: "Russian",
+  chi: "Chinese",
+  jpn: "Japanese",
+  ara: "Arabic",
+  hin: "Hindi",
+  ben: "Bengali",
+  tam: "Tamil",
+  tel: "Telugu",
+  mal: "Malayalam",
+  urd: "Urdu",
+  tur: "Turkish",
+  kor: "Korean",
+  dut: "Dutch",
+  pol: "Polish",
+  swe: "Swedish",
+  fin: "Finnish",
+  nor: "Norwegian",
+  dan: "Danish",
+  cze: "Czech",
+  gre: "Greek",
+  heb: "Hebrew",
+  ind: "Indonesian",
+  tha: "Thai",
+  vie: "Vietnamese",
+  ukr: "Ukrainian",
+  rum: "Romanian",
+  hun: "Hungarian",
+  per: "Persian",
+  scc: "Serbian",
+  slo: "Slovak",
+  bul: "Bulgarian",
+  lit: "Lithuanian",
+  lav: "Latvian",
+  est: "Estonian",
+  slv: "Slovenian",
+  hrv: "Croatian",
+  gle: "Irish",
+  mlt: "Maltese",
+  ice: "Icelandic",
+  afr: "Afrikaans",
+  swa: "Swahili",
+};
 
 
   const [booksFound, setBooksFound] = useState(books.length);
@@ -71,28 +70,38 @@ const allLanguages = Object.keys(languageMap).sort();
 
   const isFirstRender = useRef(true);
 
-  // 🔄 Debounce title input
+  // Debounce title input
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedTitle(title), 500);
     return () => clearTimeout(handler);
   }, [title]);
 
+  // Fetch books function
   const fetchBooks = async (filters) => {
     setIsLoading(true);
     try {
       const query = [];
       if (filters.title) query.push(`title=${encodeURIComponent(filters.title)}`);
       if (filters.year) query.push(`first_publish_year=${encodeURIComponent(filters.year)}`);
-      if (filters.language) query.push(`language=${encodeURIComponent(filters.language)}`);
 
       const url =
         query.length === 0
-          ? "https://openlibrary.org/search.json?q=the" // default query
+          ? "https://openlibrary.org/search.json?q=the"
           : `https://openlibrary.org/search.json?${query.join("&")}`;
 
       const response = await fetch(url);
       const data = await response.json();
-      const docs = data.docs || [];
+      let docs = data.docs || [];
+
+      // Language filter (manual)
+      if (filters.language) {
+  docs = docs.filter(
+    (book) =>
+      Array.isArray(book.language) &&
+      book.language.includes(filters.language)
+  );
+}
+
 
       setBooks(docs);
       setBooksFound(docs.length);
@@ -104,7 +113,7 @@ const allLanguages = Object.keys(languageMap).sort();
     }
   };
 
-  // 🔄 Fetch books when filters change
+  // Fetch books when filters change
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -122,10 +131,11 @@ const allLanguages = Object.keys(languageMap).sort();
     localStorage.setItem("title", title);
     localStorage.setItem("year", year);
     localStorage.setItem("language", language);
-  }, [debouncedTitle, year, language]);
+    // eslint-disable-next-line
+  }, [debouncedTitle, year, language]); // Only trigger on filter changes
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-pink-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 flex flex-col">
       <div className="lg:w-[80%] w-[90%] mx-auto py-10 relative">
         <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent drop-shadow-md">
           📚 Book Finder
@@ -142,7 +152,7 @@ const allLanguages = Object.keys(languageMap).sort();
               onChange={(e) => setTitle(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-              className="w-full lg:p-3 p-2 rounded-xl border border-gray-300 bg-white shadow-sm outline-blue-100"
+              className="w-full lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
 
             {/* Suggestions */}
@@ -171,18 +181,18 @@ const allLanguages = Object.keys(languageMap).sort();
               placeholder="📅 Published Year"
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              className="flex-1 w-[45%] lg:p-3 p-2 bg-white rounded-xl border border-gray-300 shadow-sm outline-blue-100"
+              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
 
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="flex-1 w-[45%] lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm ring-blue-400"
+              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
             >
-              <option value="">🌐 Language</option>
-              {allLanguages.map((lang) => (
-                <option key={lang} value={lang}>
-                  {languageMap[lang]}({lang.toUpperCase()})
+              <option value="">🌐 Language (All)</option>
+              {Object.entries(allLanguages).map(([code, name]) => (
+                <option key={code} value={code}>
+                  {name}
                 </option>
               ))}
             </select>
@@ -201,12 +211,10 @@ const allLanguages = Object.keys(languageMap).sort();
                 <h2 className="text-gray-500 text-lg">No books found ❌</h2>
               </div>
             )}
-
             <p className="text-center text-gray-600 mt-4 font-medium">
               {booksFound} books found ✅
             </p>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-8 relative">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 relative z-10">
               {books.map((book) => (
                 <BookCard
                   key={book.key}
