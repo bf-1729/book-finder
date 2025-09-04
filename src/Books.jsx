@@ -39,14 +39,13 @@ const Books = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-200 via-white to-gray-200">
-
-
+      <div className="lg:w-[80%] w-[90%] mx-auto">
       <h1 className="flex justify-center text-2xl font-bold w-full mx-auto mb-6 pt-10">
         Book Finder
       </h1>
       
-      <div className="mb-6 lg:mb-0 flex flex-col lg:flex-row gap-4 justify-center relative">
-        <div className="mx-auto w-[400px] relative">
+      <div className="mb-6 lg:mb-0 w-full flex flex-col lg:flex-row gap-4 items-center lg:justify-around justify-center relative">
+        
           <input
             type="text"
             placeholder="Search by Title"
@@ -54,7 +53,7 @@ const Books = () => {
             onChange={(e) => setTitle(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // delay to allow click
-            className="outline-1 outline-gray-400 mx-12 lg:p-2 p-1 rounded shadow w-full bg-white"
+            className="outline-1 outline-gray-400 mx-12 lg:p-4 p-1 rounded shadow w-1/2 bg-white"
           />
           {/* Suggestions Dropdown */}
           {showSuggestions && title.trim() && books.length > 0 && (
@@ -73,20 +72,19 @@ const Books = () => {
               ))}
             </ul>
           )}
-        </div>
 
-        <div className="flex w-full mx-auto items-start justify-evenly">
+        <div className="flex gap-8 w-1/2">
         <input
           type="number"
           placeholder="Published Year"
           value={year}
           onChange={(e) => setYear(e.target.value)}
-          className="border p-1 lg:p-2 rounded shadow w-[150px] bg-white"
+          className="border p-1 lg:p-4 rounded shadow w-1/2 bg-white"
         />
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          className="border p-1 lg:p-2 rounded shadow w-[150px] bg-white"
+          className="border p-1 lg:p-4 rounded shadow w-1/2 bg-white"
         >
           <option value="">Language</option>
           <option value="eng">English</option>
@@ -123,6 +121,7 @@ const Books = () => {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 };
