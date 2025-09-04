@@ -53,7 +53,7 @@ const Books = () => {
             onChange={(e) => setTitle(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // delay to allow click
-            className="outline-1 outline-gray-400 mx-12 lg:p-4 p-1 rounded shadow w-1/2 bg-white"
+            className="outline-1 outline-gray-400 mx-12 lg:p-4 p-1 rounded shadow lg:w-1/2 w-full bg-white"
           />
           {/* Suggestions Dropdown */}
           {showSuggestions && title.trim() && books.length > 0 && (
@@ -73,7 +73,7 @@ const Books = () => {
             </ul>
           )}
 
-        <div className="flex gap-8 w-1/2">
+        <div className="flex gap-8 lg:w-1/2 w-full">
         <input
           type="number"
           placeholder="Published Year"
