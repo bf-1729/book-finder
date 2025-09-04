@@ -181,13 +181,13 @@ const Books = () => {
               placeholder="📅 Published Year"
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-[45%]"
             />
 
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-[45%]"
             >
               <option value="">🌐 Language (All)</option>
               {Object.entries(allLanguages).map(([code, name]) => (
