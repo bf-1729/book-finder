@@ -30,11 +30,11 @@ const BookCard = ({ title, author, year, language, coverId }) => {
 
         {/* Languages */}
         {language && (
-          <div className="mt-2 grid lg:grid-cols-5 grid-cols-4 gap-1">
+          <div className="mt-2 grid lg:grid-cols-5 grid-cols-4 lg:gap-1 gap-2">
             {language.map((lang, idx) => (
               <span
                 key={idx}
-                className="px-2 py-0.5 text-[10px] font-medium bg-indigo-100 text-indigo-700 rounded-full border border-indigo-200"
+                className="px-1 py-0.5 text-[10px] font-medium bg-blue-00 text-indigo-700 rounded-full border border-indigo-200"
               >
                 {lang.toUpperCase()}
               </span>
