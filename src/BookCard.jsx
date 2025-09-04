@@ -34,7 +34,7 @@ const BookCard = ({ title, author, year, language, coverId }) => {
             {language.map((lang, idx) => (
               <span
                 key={idx}
-                className="px-1 py-0.5 text-[10px] font-medium bg-blue-00 text-indigo-700 rounded-full border border-indigo-200"
+                className="px-1 py-0.5 text-[10px] font-medium text-indigo-700 rounded-2xl border border-indigo-200"
               >
                 {lang.toUpperCase()}
               </span>
