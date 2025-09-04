@@ -125,7 +125,7 @@ const allLanguages = Object.keys(languageMap).sort();
   }, [debouncedTitle, year, language]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-white to-pink-100 flex flex-col">
       <div className="lg:w-[80%] w-[90%] mx-auto py-10 relative">
         <h1 className="text-4xl font-extrabold text-center bg-gradient-to-r from-indigo-600 to-pink-500 bg-clip-text text-transparent drop-shadow-md">
           📚 Book Finder
@@ -171,13 +171,13 @@ const allLanguages = Object.keys(languageMap).sort();
               placeholder="📅 Published Year"
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              className="flex-1 lg:p-3 p-2 bg-white rounded-xl border border-gray-300 shadow-sm outline-blue-100"
+              className="flex-1 w-[45%] lg:p-3 p-2 bg-white rounded-xl border border-gray-300 shadow-sm outline-blue-100"
             />
 
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm ring-blue-400"
+              className="flex-1 w-[45%] lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm ring-blue-400"
             >
               <option value="">🌐 Language</option>
               {allLanguages.map((lang) => (

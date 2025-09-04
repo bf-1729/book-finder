@@ -21,16 +21,16 @@ const BookCard = ({ title, author, year, language, coverId }) => {
       {/* Info */}
       <div className="p-3 flex flex-col flex-grow">
         {title && (
-          <h2 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-indigo-600 transition">
+          <p className="lg:text-lg text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-indigo-600 transition">
             {title}
-          </h2>
+          </p>
         )}
         {author && <p className="text-xs text-gray-700 mt-1">👤 {author}</p>}
         {year && <p className="text-xs text-gray-500 mt-1">📅 {year}</p>}
 
         {/* Languages */}
         {language && (
-          <div className="mt-2 flex flex-wrap gap-1">
+          <div className="mt-2 grid lg:grid-cols-5 grid-cols-4 gap-1">
             {language.map((lang, idx) => (
               <span
                 key={idx}
