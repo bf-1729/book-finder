@@ -189,7 +189,7 @@ const Books = () => {
               onChange={(e) => setLanguage(e.target.value)}
               className="flex-1 lg:p-3 p-2 rounded-xl border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400 w-[45%]"
             >
-              <option value="">🌐 Language (All)</option>
+              <option value="">🌐 Language</option>
               {Object.entries(allLanguages).map(([code, name]) => (
                 <option key={code} value={code}>
                   {name}
