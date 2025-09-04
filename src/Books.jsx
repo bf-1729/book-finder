@@ -57,7 +57,7 @@ const Books = () => {
           />
           {/* Suggestions Dropdown */}
           {showSuggestions && title.trim() && books.length > 0 && (
-            <ul className="absolute top-full left-0 right-0 z-20 bg-white border border-gray-300 rounded shadow max-h-60 w-full overflow-y-auto">
+            <ul className="absolute top-8 left-0 right-0 z-20 bg-white border border-gray-300 rounded shadow max-h-60 w-full overflow-y-auto">
               {books.map((book) => (
                 <li
                   key={book.key}
@@ -107,7 +107,7 @@ const Books = () => {
               <h2 className="text-gray-500 text-lg">No books found ❌</h2>
             </div>
           )}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 p-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
             {books.slice(0, 40).map((book) => (
               <BookCard
                 key={book.key}
