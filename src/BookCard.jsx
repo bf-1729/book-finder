@@ -1,43 +1,48 @@
 import React from "react";
+
 const BookCard = ({ title, author, year, language, coverId }) => {
-  // OpenLibrary cover image URL
-  const coverUrl = coverId
-    && `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+  const coverUrl = coverId && `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+
   return (
-      <div className="border rounded-xl flex flex-col p-4 bg-white">
-      {coverUrl && (
-        <div className="relative w-full h-40 overflow-hidden">
-          <img
-            src={coverUrl}
-            alt={title}
-            className="w-full h-full object-cover transform group-hover:scale-105 transition duration-300"
-          />
+    <div className="group p-3 relative flex flex-col rounded-xl bg-gradient-to-br from-white to-gray-50 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:-translate-y-1">
+      {/* Cover */}
+      {coverUrl ? (
+        <img
+          src={coverUrl}
+          alt={title}
+          className="w-full h-32 object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="w-full h-32 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-600 text-xs italic">
+          No Cover
         </div>
       )}
-      <div className="flex flex-col gap-1 flex-grow">
+
+      {/* Info */}
+      <div className="p-3 flex flex-col flex-grow">
         {title && (
-          <div className="lg:text-lg text-md font-semibold text-gray-800 line-clamp-2">
+          <h2 className="text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-indigo-600 transition">
             {title}
-          </div>
+          </h2>
         )}
+        {author && <p className="text-xs text-gray-700 mt-1">👤 {author}</p>}
+        {year && <p className="text-xs text-gray-500 mt-1">📅 {year}</p>}
 
-        {author && (
-          <p className="text-sm text-gray-700">by {author}</p>
-        )}
-
-        {year && (
-          <p className="text-sm text-gray-500">Published: {year}</p>
-        )}
-
+        {/* Languages */}
         {language && (
-          <div className="mt-auto">
-            <span className="inline-block px-3 py-1 text-xs font-medium bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full shadow">
-              {language.toUpperCase()}
-            </span>
+          <div className="mt-2 flex flex-wrap gap-1">
+            {language.map((lang, idx) => (
+              <span
+                key={idx}
+                className="px-2 py-0.5 text-[10px] font-medium bg-indigo-100 text-indigo-700 rounded-full border border-indigo-200"
+              >
+                {lang.toUpperCase()}
+              </span>
+            ))}
           </div>
         )}
       </div>
-      </div>
+    </div>
   );
 };
 
