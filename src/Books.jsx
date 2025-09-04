@@ -45,7 +45,7 @@ const Books = () => {
         Book Finder
       </h1>
       
-      <div className="mb-6 flex flex-col md:flex-row gap-4 justify-center relative">
+      <div className="mb-6 lg:mb-0 flex flex-col lg:flex-row gap-4 justify-center relative">
         <div className="mx-auto w-[400px] relative">
           <input
             type="text"
@@ -54,11 +54,11 @@ const Books = () => {
             onChange={(e) => setTitle(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setTimeout(() => setShowSuggestions(false), 200)} // delay to allow click
-            className="outline-1 outline-gray-400 mx-12 lg:p-2 p-1 rounded shadow lg:w-[400px] w-full bg-white"
+            className="outline-1 outline-gray-400 mx-12 lg:p-2 p-1 rounded shadow w-full bg-white"
           />
           {/* Suggestions Dropdown */}
           {showSuggestions && title.trim() && books.length > 0 && (
-            <ul className="absolute top-full left-0 right-0 z-20 bg-white border border-gray-300 rounded shadow max-h-60 overflow-y-auto">
+            <ul className="absolute top-full left-0 right-0 z-20 bg-white border border-gray-300 rounded shadow max-h-60 w-full overflow-y-auto">
               {books.map((book) => (
                 <li
                   key={book.key}
@@ -75,7 +75,7 @@ const Books = () => {
           )}
         </div>
 
-        <div className="flex gap-28 mx-auto">
+        <div className="flex w-full mx-auto items-start justify-evenly">
         <input
           type="number"
           placeholder="Published Year"
@@ -109,7 +109,7 @@ const Books = () => {
               <h2 className="text-gray-500 text-lg">No books found ❌</h2>
             </div>
           )}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6 p-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 p-3">
             {books.slice(0, 40).map((book) => (
               <BookCard
                 key={book.key}

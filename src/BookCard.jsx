@@ -16,9 +16,9 @@ const BookCard = ({ title, author, year, language, coverId }) => {
       )}
       <div className="flex flex-col gap-1 flex-grow">
         {title && (
-          <h2 className="text-lg font-semibold text-gray-800 line-clamp-2">
+          <div className="lg:text-lg text-md font-semibold text-gray-800 line-clamp-2">
             {title}
-          </h2>
+          </div>
         )}
 
         {author && (
