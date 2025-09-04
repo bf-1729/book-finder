@@ -19,7 +19,7 @@ const BookCard = ({ title, author, year, language, coverId }) => {
       )}
 
       {/* Info */}
-      <div className="p-3 flex flex-col flex-grow">
+      <div className="p-1 flex flex-col flex-grow">
         {title && (
           <p className="lg:text-lg text-sm font-semibold text-gray-900 line-clamp-2 group-hover:text-indigo-600 transition">
             {title}
