@@ -173,8 +173,6 @@ const Books = () => {
               </ul>
             )}
           </div>
-
-          {/* Year + Language */}
           <div className="flex gap-4 w-full lg:w-1/2">
             <input
               type="number"
